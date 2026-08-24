@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+{% for q in questions %}
+    <p>{{forloop.counter}}-{{q.text}}</p>
+    
+    {% for o in q.options.all %}
+        
+        {% if o.is_correct == True %}
+            <p style="color:green">{{o.text}}</p>
+        {% endif %}
+        <p>{{o.text}}</p>
+            
+    {% endfor %}
+        
+{% endfor %}
+    
+<div>
+    <p></p>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <h1>Add Question</h1>
+
+    {{question_form}}
+
+    <h2>Add Options</h2>
+
+    {{option_form.management_form}}
+
+    {% for options in option_form %}
+       
+
+      {{options.as_p}}
+    
+
+    {% endfor %}
+        
+
+    <input type="submit" class="btn btn-primary" value="Add Question">
+
+
+</form>
+
+    
+{% endblock body %}
+
+
+
+
+    
